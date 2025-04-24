@@ -17,6 +17,9 @@ try:
     elif time_format == 2:
         duration = duration * 60 * 60
     endtime = time.time() + duration
+    
+    print("Focus-lock is now running...")
+
     while endtime > time.time():    
         for app in check_app:
             found = False
@@ -28,18 +31,18 @@ try:
                         process.terminate()
                         process.wait(timeout=3)
                         continue
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess, AttributeError):
-                print("An exception has occurred.")        
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess, AttributeError) as e:
+                print(f"An exception ({e}) has occurred while terminating {app}")        
             if found:
                 print(f"{app} was found to be running and was terminated.")
-            else:
-                print(f"{app} is not running.")
         time.sleep(interval) 
         
+    print("The apps are no longer locked.")
+
 except ValueError as e:
     print(e)
 except TypeError:
-    print("the key 'name' doesn't exists.")
+    print("The key 'name' doesn't exist.")
 except AttributeError:
     print("A process doesn't have a name attribute.")
 except psutil.Error:
