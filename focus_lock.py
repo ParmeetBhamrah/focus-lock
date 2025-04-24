@@ -8,7 +8,7 @@ try:
         raise ValueError("No input entered. Please enter the App name to terminate.")
     
     interval = 2
-    time_format = int(input("Please select your time format:\n1. Type 1 for minutes.\n2. Type 2 for hours."))
+    time_format = int(input("Please select your time format:\n1. Type 1 for minutes.\n2. Type 2 for hours.\n"))
     duration = int(input("Enter the time (in your selected format) you want to lock the app for: "))
     if not duration:
         raise ValueError("No duration entered to lock the app for!")
